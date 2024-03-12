@@ -1,0 +1,84 @@
+class ExchangeEconomyClass:
+
+    def __init__(self):
+
+        par = self.par = SimpleNamespace()
+        sol = self.sol = SimpleNamespace()
+
+        # a. preferences
+        par.alpha = 1/3
+        par.beta = 2/3
+
+        # b. endowments
+        par.w1A = 0.8
+        par.w2A = 0.3
+
+        # c. grids and allocation
+        par.N = 100
+
+        par.p1_grid = np.linspace(0,1,par.N+1)
+        par.eps_grid = np.empty((2,par.N+1))
+
+        # solution parameters
+        par.tol = 1e-8
+        par.maxiter = 1000
+        sol.solved = False
+
+    def utility_A(self, x1A, x2A):
+        """
+        Utility function for consumer A
+
+        parameters:
+
+        returns:
+        """
+
+        return x1A**self.par.alpha * x2A**(1 - self.par.alpha) 
+
+    def utility_B(self,x1B,x2B):
+        """
+        Utility function for consumer A
+
+        parameters:
+
+        returns:
+        """
+
+        return x1B**self.par.beta * x2B**(1 - self.par.beta)
+
+    def demand_A(self, p1):
+        """
+        Consumer A's demand for good 1 and 2
+        """
+
+        income = p1 * self.par.w1A + self.par.w2A
+
+        x1A = self.par.alpha * (income / p1)
+        x2A = (1 - self.par.alpha) * income
+        return x1A, x2A
+
+    def demand_B(self, p1):
+        """
+        Consumer B's demand for good 1 and 2
+        """
+
+        w1B = 1 - self.par.w1A
+        w2B = 1 - self.par.w2A
+        income = p1 * w1B + w2B
+
+        x1B = self.par.beta * (income / p1)
+        x2B = (1 - self.par.beta) * income
+        return x1B, x2B
+
+    def check_market_clearing(self, p1):
+        """
+        Checks if the market clears for good 1 and 2
+        """
+
+        x1A, x2A = self.demand_A(p1)
+        x1B, x2B = self.demand_B(p1)
+
+        eps1 = x1A - self.par.w1A + x1B - (1 - self.par.w1A)
+        eps2 = x2A - self.par.w2A + x2B - (1 - self.par.w2A)
+
+        return eps1, eps2
