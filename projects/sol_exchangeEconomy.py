@@ -233,6 +233,7 @@ def plot_edgeworth(par, sol, pareto_set=True, question6b=False, indifference_cur
 
     ax_A.legend(frameon=True,loc='upper right',bbox_to_anchor=(2.0,1.0)); 
 
+# h. plots and calculates excess demand and market clearing price
 def plot_excess_demand(par, sol):
     """
     Plots the excess demand for good 1 and 2 as a function of p1
@@ -260,6 +261,7 @@ def plot_excess_demand(par, sol):
     print(f'Error in market clearing conditions: {sol.eps[0]:.8f}')
     print(f'\nMarket clearing price: {sol.p1:.8f}')
 
+# i. 
 def question4(par, sol):
 
     # solve 4a
