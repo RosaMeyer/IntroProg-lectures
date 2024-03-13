@@ -110,6 +110,7 @@ def walras_eq(par, sol, p_guess=1, print_output=True):
         print('Not solved!')
 
 # e. identifies allocations in the economy where both consumers can be made better off compared to their initial endowments - C function
+# Find Pareto improvements relative to the endowment
 def improvement_set(par, sol):
     x_vec = np.linspace(0, 1, par.N+1)
     C_set = np.full((2, (par.N+1)**2), np.nan)
