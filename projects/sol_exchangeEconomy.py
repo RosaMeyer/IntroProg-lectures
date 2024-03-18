@@ -268,16 +268,16 @@ def question4(par, sol):
     # solve 4a
     sol.ua_grid = np.empty(par.N+1)
 
-    for i,p1 in enumerate(par.P1_grid):
-        x1B,x2B = demand_B(par, p1)
-        if x1B >1 or x2B >1:
+    for i, p1 in enumerate(par.P1_grid):
+        x1B, x2B = demand_B(par, p1)
+        if x1B > 1 or x2B > 1:
             sol.ua_grid[i] = 0
         else:
             sol.ua_grid[i] = utility_A(par, 1-x1B, 1-x2B)
 
     fig, ax = plt.subplots(figsize=(6,4))
 
-    ax.scatter(par.P1_grid,sol.ua_grid,s=1,label='$u^{A}$')
+    ax.scatter(par.P1_grid, sol.ua_grid, s=1, label='$u^{A}$')
 
     # plot solution 
     istar = np.argmax(sol.ua_grid)
@@ -286,8 +286,8 @@ def question4(par, sol):
     sol.p_4a = par.P1_grid[istar]
     sol.uA_4a = sol.ua_grid[istar]
 
-    x1B,x2B = demand_B(par, sol.p_4a)
-    sol.xA_4a = np.array([1-x1B,1-x2B])
+    x1B, x2B = demand_B(par, sol.p_4a)
+    sol.xA_4a = np.array([1-x1B, 1-x2B])
     sol.uB_4a = utility_B(par, x1B, x2B)
 
     ax.legend()
