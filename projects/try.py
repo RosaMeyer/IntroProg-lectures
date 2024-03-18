@@ -1,3 +1,5 @@
+# Plots (and prints) Edgeworth Box with Pareto Improvements
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -18,7 +20,7 @@ omega_2B = 1 - omega_2A
 fig, ax = plt.subplots()
 
 # Plot initial endowment point
-ax.scatter(omega_1A, omega_2A, marker='o', color='red', label='Initial Endowment (B)')
+ax.scatter(omega_1A, omega_2A, marker='o', color='red', label='Initial Endowment (A)')
 
 # Plot indifference curves
 # xA1_values = np.linspace(0, 1, 100)
